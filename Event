@@ -1,0 +1,43 @@
+#include <iostream>
+
+class Event {
+public:
+    // Enumeration to define the different types of events.
+    enum EventType {
+        ARRIVAL,                // Event when a frame arrives at the Tx queue
+        TRANSMISSION_START,     // Event when a frame starts being transmitted
+        TRANSMISSION_END,      // Event when a frame finishes being transmitted
+        COLLISION,             // Event when a collision is detected
+        BACKOFF_END            // Event when backoff timer expires
+    };
+
+private:
+    EventType type;       // Type of the event
+    double time;          // Time at which the event occurs
+    int stationId;        // Id of the station related to this event
+
+public:
+    // Constructor to initialize the event
+    Event(EventType t, double eventTime, int id) : type(t), time(eventTime), stationId(id) {}
+
+    // Getter for the event type
+    EventType getType() const {
+        return type;
+    }
+
+    // Getter for the event time
+    double getTime() const {
+        return time;
+    }
+
+    // Getter for the station id related to the event
+    int getStationId() const {
+        return stationId;
+    }
+
+    // Function to compare events based on their time for sorting purposes
+    bool operator<(const Event& other) const {
+        return time < other.time;
+    }
+};
+
